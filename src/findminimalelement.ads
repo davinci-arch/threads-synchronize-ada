@@ -1,5 +1,5 @@
-with Ada.Text_IO, ArrayPackage;
-use Ada.Text_IO, ArrayPackage;
+with Ada.Text_IO, ArrayPackage, ShareData;
+use Ada.Text_IO, ArrayPackage, ShareData;
 
 package FindMinimalElement is
    

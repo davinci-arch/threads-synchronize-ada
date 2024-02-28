@@ -26,9 +26,13 @@ package body FindMinimalElement is
             localIdx := i;
          end if;
       end loop;
-      Put_Line("Id:[" & idCopy'img & "] Local minimum:["
-               & localMinValue'img & "] local idx:[" & localIdx'img & "]"
-              & " startIdx:" & startIdxCopy'img & " endIdx:" & endIdxCopy'img);
+      MinValueInfo.incrementTasksComplete;
+      if (MinValueInfo.getMinVal > localMinValue) then
+         MinValueInfo.UpdateMinVal(localMinValue, localIdx);
+      end if;
+      --Put_Line("Id:[" & idCopy'img & "] Local minimum:["
+              -- & localMinValue'img & "] local idx:[" & localIdx'img & "]"
+             -- & " startIdx:" & startIdxCopy'img & " endIdx:" & endIdxCopy'img);
    end FindMinimal;
 
 end FindMinimalElement;

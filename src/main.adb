@@ -1,5 +1,7 @@
-with Ada.Text_IO, Ada.Integer_Text_IO, FindMinimalElement, ArrayPackage, ArrayUtils;
-use Ada.Text_IO, Ada.Integer_Text_IO, FindMinimalElement, ArrayPackage, ArrayUtils;
+with Ada.Text_IO, Ada.Integer_Text_IO, FindMinimalElement, ArrayPackage, ArrayUtils,
+ShareData;
+use Ada.Text_IO, Ada.Integer_Text_IO, FindMinimalElement, ArrayPackage, ArrayUtils,
+ShareData;
 
 
 procedure Main is
@@ -26,8 +28,12 @@ begin
          threadsArr(i).Start(i, values, idx, idx + part);
          idx := idx + part;
       end loop;
+      while (MinValueInfo.getTasksCompleted /= amountOfThreads) loop
+         null;
+      end loop;
       printArray(values);
       Put(Character'Val(10));
+      Put_Line("Min val:" & MinValueInfo.getMinVal'img & " idx:[" & MinValueInfo.getMinValIdx'img & "]");
    end;
 
 
