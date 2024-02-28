@@ -18,4 +18,10 @@ package body ArrayUtils is
       return values; 
    end generateArray;
 
+   procedure printArray(values: ArrayValues) is
+   begin
+      for i in values'range loop
+         Put(Integer'image(values(i)));
+      end loop;
+   end printArray;
 end ArrayUtils;
