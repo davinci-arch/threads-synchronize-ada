@@ -8,11 +8,13 @@ procedure Main is
    amountOfThreads: Integer;
    values: ArrayValues;
    type Threads is array (Integer range <>) of FindMinimal;
+   minElem : Integer;
+   minElemIdx: Integer;
 begin
    Put("Write amount of threads: ");
    Get(amountOfThreads);
    values := generateArray;
-
+   MinValueInfo.setAmountOfThreads(amountOfThreads);
    declare
       threadsArr: Threads (1 .. amountOfThreads);
       idx: Integer := 1;
@@ -28,12 +30,10 @@ begin
          threadsArr(i).Start(i, values, idx, idx + part);
          idx := idx + part;
       end loop;
-      while (MinValueInfo.getTasksCompleted /= amountOfThreads) loop
-         null;
-      end loop;
-      printArray(values);
-      Put(Character'Val(10));
-      Put_Line("Min val:" & MinValueInfo.getMinVal'img & " idx:[" & MinValueInfo.getMinValIdx'img & "]");
+      MinValueInfo.await(minElem, minELemIdx);
+      --printArray(values);
+      --Put(Character'Val(10));
+      Put_Line("Min val:" & minElem'img & " idx:[" & minELemIdx'img & "]");
    end;
 
 

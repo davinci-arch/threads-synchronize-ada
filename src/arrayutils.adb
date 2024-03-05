@@ -14,7 +14,6 @@ package body ArrayUtils is
          values(i) := Random(gen, 0, 1000);
       end loop;
       values(Random(gen2, ArrayValues'First, ArrayValues'Last)) := -1;
-      
       return values; 
    end generateArray;
 

@@ -3,28 +3,26 @@ package body ShareData is
    protected body MinValueInfo is
       procedure UpdateMinVal(val: Integer; idx: Integer) is
       begin
-         minVal := val;
-         minValIdx := idx;
+         if (minVal > val) then
+            minVal := val;
+            minValIdx := idx;
+         end if;
       end UpdateMinVal;
       procedure incrementTasksComplete is
       begin
          tasksCompleted := tasksCompleted + 1;
       end incrementTasksComplete;
       
-      function getMinVal return Integer is
+      procedure setAmountOfThreads(amountOfThreads: Integer) is
       begin
-         return minVal;
-      end getMinVal;
+         ShareData.MinValueInfo.amountOfThreads := amountOfThreads;
+      end setAmountOfThreads;
       
-      function getMinValIdx return Integer is
+      entry await(minElem : out Integer; minElemIdx : out Integer) when tasksCompleted = amountOfThreads is
       begin
-         return minValIdx;
-      end getMinValIdx;
-      
-      function getTasksCompleted return Integer is
-      begin
-         return tasksCompleted;
-      end getTasksCompleted;
+         minElem := minVal;
+         minElemIdx := minValIdx;
+      end await;
    end MinValueInfo;
 
 end ShareData;
